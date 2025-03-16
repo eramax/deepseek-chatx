@@ -28,7 +28,7 @@ const formattedContent = computed(() => marked.parse(props.message.content));
       message.role === 'assistant' ? 'bg-spotify-subtle' : 'bg-spotify-base',
     ]"
   >
-    <div class="w-full max-w-3x flex gap-4">
+    <div class="w-full max-w-3xl flex gap-4">
       <div
         class="w-8 h-8 rounded-full flex items-center justify-center text-sm"
         :class="
