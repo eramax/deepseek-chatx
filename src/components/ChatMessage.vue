@@ -2,7 +2,7 @@
 import { marked } from 'marked';
 import { computed } from 'vue';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github-dark.css'; // اختر أي نمط تريده
+import 'highlight.js/styles/github-dark.css'; 
 
 const props = defineProps({
   message: {
@@ -28,7 +28,7 @@ const formattedContent = computed(() => marked.parse(props.message.content));
       message.role === 'assistant' ? 'bg-spotify-subtle' : 'bg-spotify-base',
     ]"
   >
-    <div class="max-w-3xl mx-auto flex gap-4">
+    <div class="w-full max-w-3x flex gap-4">
       <div
         class="w-8 h-8 rounded-full flex items-center justify-center text-sm"
         :class="
@@ -39,7 +39,7 @@ const formattedContent = computed(() => marked.parse(props.message.content));
       >
         {{ message.role === 'assistant' ? 'AI' : 'U' }}
       </div>
-      <div class="flex-1 prose prose-invert max-w-none mt-[-20px]">
+      <div class="flex-1 prose prose-invert max-w-full mt-[-20px]">
         <div v-html="formattedContent"></div>
       </div>
     </div>

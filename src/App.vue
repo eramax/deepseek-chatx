@@ -7,9 +7,9 @@ const conversations = ref([]);
 const currentConversation = ref(null);
 const showSettings = ref(false);
 const settings = ref({
-  serverUrl: 'https://api.deepseek.com',
+  serverUrl: '',
   apiToken: '',
-  modelName: 'deepseek-chat',
+  modelName: '',
 });
 const inputMessage = ref('');
 const isLoading = ref(false);

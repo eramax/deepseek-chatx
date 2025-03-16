@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   show: Boolean,
@@ -7,7 +7,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close', 'save']);
+
 const localSettings = ref({ ...props.settings });
+
+watch(() => props.settings, (newSettings) => {
+  localSettings.value = { ...newSettings };
+}, { deep: true, immediate: true });
+
 const saveSettings = () => {
   emit('save', { ...localSettings.value });
   emit('close');
@@ -21,22 +27,22 @@ const saveSettings = () => {
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium mb-1 text-spotify-text">Server URL</label>
-          <input v-model="localSettings.serverUrl" 
-                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none" 
-                 placeholder="https://api.deepseek.com">
+          <input v-model="localSettings.serverUrl"
+                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none"
+                 placeholder="http://localhost:11434/v1">
         </div>
         <div>
           <label class="block text-sm font-medium mb-1 text-spotify-text">API Token</label>
-          <input v-model="localSettings.apiToken" 
-                 type="password" 
-                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none" 
+          <input v-model="localSettings.apiToken"
+                 type="password"
+                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none"
                  placeholder="Your DeepSeek API token">
         </div>
         <div>
           <label class="block text-sm font-medium mb-1 text-spotify-text">Model Name</label>
-          <input v-model="localSettings.modelName" 
-                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none" 
-                 placeholder="deepseek-chat">
+          <input v-model="localSettings.modelName"
+                 class="w-full bg-spotify-base rounded-md p-2 border border-spotify-text/10 focus:border-spotify-highlight focus:outline-none"
+                 placeholder="gemma3:27b">
         </div>
       </div>
       <div class="flex justify-end gap-3 mt-6">
